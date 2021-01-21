@@ -2,7 +2,9 @@
 title: "Course Project 1"
 author: "Robson Cruz"
 date: "20/01/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -122,11 +124,14 @@ assignment? What is the impact of imputing missing data on the estimates of
 the total daily number of steps?
 ```{r echo = TRUE}
 no_NA %>%
-        group_by(day) %>%
+        group_by(day, steps) %>%
         summarize(mean = mean(steps),
                   median = median(steps)) %>%
-        ggplot(aes(x = day)) +
-        geom_histogram(fill="white", color = "steelblue", position="dodge")
+        ggplot(aes(x = steps)) +
+        geom_histogram(fill="white", color = "steelblue", position="dodge") +
+        geom_vline(aes(xintercept = mean(steps), color = "Mean of steps")) +
+        geom_vline(aes(xintercept = median(steps), color = "Median of steps")) +
+        theme(legend.position = c(0.9, 0.9))
 ```
 ## Are there differences in activity patterns between weekdays and weekends?
 1. Create a new factor variable in the dataset with two levels – “weekday” and
