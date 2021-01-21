@@ -58,6 +58,13 @@ str(activity)
 ## Read the data
 as_tibble(activity)
 
+## 2. Processing
+activity <- activity %>%
+        mutate(date = as.Date(date, format = "%Y-%m-%d"),
+               day = mday(date))
+
+as_tibble(activity)
+
 ### What is mean total number of steps taken per day? ###
 ### 1. Calculate the total number of steps taken per day
 activity %>%
@@ -122,12 +129,15 @@ no_NA <- activity %>%
 ### assignment? What is the impact of imputing missing data on the estimates of 
 ### the total daily number of steps?
 no_NA %>%
-        group_by(day) %>%
+        group_by(day, steps) %>%
         summarize(mean = mean(steps),
                   median = median(steps)) %>%
-        ggplot(aes(x = day)) +
-        geom_histogram(fill="white", color = "steelblue", position="dodge")
-
+        ggplot(aes(x = steps)) +
+        geom_histogram(fill="white", color = "steelblue", position="dodge") +
+        geom_vline(aes(xintercept = mean(steps), color = "Mean of steps")) +
+        geom_vline(aes(xintercept = median(steps), color = "Median of steps")) +
+        theme(legend.position = c(0.9, 0.9))
+  
 ### Are there differences in activity patterns between weekdays and weekends? ###
 ### 1. Create a new factor variable in the dataset with two levels – “weekday”
 ### and “weekend” indicating whether a given date is a weekday or weekend day.
