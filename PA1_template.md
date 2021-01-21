@@ -43,6 +43,9 @@ activity %>%
         ggplot(aes(x = day, y = steps)) +
         geom_bar(stat = "identity", fill = "steelblue")
 ```
+<p align="center" width="100%">
+  <img src="https://github.com/rcflorestal/filehash/blob/master/figure/Rplot1.png">
+</p>
 
 3. Calculate and report the mean and median of the total number of steps
 taken per day
@@ -65,6 +68,10 @@ activity %>%
         geom_line(color="steelblue") +
         scale_x_date(date_labels = "%b %d")
 ```
+<p align="center" width="100%">
+  <img src="https://github.com/rcflorestal/filehash/blob/master/figure/Rplot2.png">
+</p>
+
 2. Which 5-minute interval, on average across all the days in the dataset, 
 contains the maximum number of steps?
 ```{r echo = TRUE}
@@ -112,6 +119,10 @@ no_NA %>%
         ggplot(aes(x = day)) +
         geom_histogram(fill="white", color = "steelblue", position="dodge")
 ```
+<p align="center" width="100%">
+  <img src="https://github.com/rcflorestal/filehash/blob/master/figure/Rplot3.png">
+</p>
+
 ## Are there differences in activity patterns between weekdays and weekends?
 1. Create a new factor variable in the dataset with two levels – “weekday” and
 “weekend” indicating whether a given date is a weekday or weekend day.
@@ -137,3 +148,6 @@ ggplot(na.omit(activity_week), aes(x = interval, y = avg)) +
              y = "Number of Steps",
              title = "Mean steps over each 5min interval split by weekday/weekend")
 ```
+<p align="center" width="100%">
+  <img src="https://github.com/rcflorestal/filehash/blob/master/figure/Rplot4.png">
+</p>
